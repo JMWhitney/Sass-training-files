@@ -1,7 +1,5 @@
 $color-btn-text: $color-background;
-$color-btn-default: $color-main;
-$color-btn-hot: $red;
-$color-btn-cool: $blue;
+$roundness: 20px 0 20px 0;
 
 %btn {
     display: inline-block;
@@ -17,17 +15,29 @@ $color-btn-cool: $blue;
     color: $color-btn-text;
 }
 
-.btn-default {
-    @extend %btn;
-    background: $color-btn-default;
+$color-btns: (
+    default: $color-main,
+    hot: $red,
+    cool: $blue,
+    awesome: $purple
+);
+
+@each $key, $value in $color-btns {
+    .btn-#{$key} {
+        @extend %btn;
+        background-color: $value;
+    }
 }
 
-.btn-hot {
-    @extend %btn;
-    background: $color-btn-hot;
-}
-
-.btn-cool {
-    @extend %btn;
-    background: $color-btn-cool;
+.grid {
+    @include clearfix;
+    .item {
+        float: left;
+        @include imagegrid(5, 1%);
+    }
+    img {
+        display: block;
+        border-radius: nth($roundness, 1);
+        max-width: 100%;
+    }
 }
